@@ -16,7 +16,7 @@ omega0=1.0
 Omega=1000.0
 kappa=0.5
 lambda0=sqrt(omega0*Omega/2.0)*sqrt(1+(kappa/omega0)^2)
-factor=1.2
+factor=parse(Float64, ARGS[1])
 lambda=factor*lambda0
 ###################################
 #lindblad of the dissipative quantum rabi model 
