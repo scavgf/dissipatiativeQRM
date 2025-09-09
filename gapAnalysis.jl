@@ -29,13 +29,14 @@ L0=-im.*(kron(H,I0)-kron(I0, H))+kappa.*Dkappa
 ###file for recording results
 file=open("data/gap-omega0-"*string(omega0)*"-Omega="*string(Omega)*"-lambda="*string(factor)*"-dim="*string(dim)*".dat","w")
 
-for ix=1:100
+for ix=1:4
         gamma=0.1*ix
         L=L0+gamma.*Dgamma
         evals, evecs, info = eigs(L; nev=2, sigma= -0.0005, tol=1e-6)
         println("Number of converged eigenvalues: ", info)
         println("ix=", ix," Smallest magnitude eigenvalues: ", evals)
-        write(file, join([gamma, evals[2]], " "), "\n")
+        vals=sort(evals,by= abs)
+        write(file, join([gamma, real(vals[2])], " "), "\n")
 end
 close(file)
 ###determine the smallest eigenvalues of the lindblad
